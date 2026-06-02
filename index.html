@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mission Control Web</title>
+    <style>
+        /* Desain Tampilan Web Tema Rig Lepas Pantai (CSS) */
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+            padding: 30px 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #1e293b;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+            border: 1px solid #334155;
+        }
+
+        h2 {
+            color: #00ffcc;
+            text-align: center;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sub {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        /* Desain Kartu Hari */
+        .day-card {
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .day-title {
+            color: #38bdf8;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        /* Desain Item Checklist */
+        .task-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 8px 0;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .task-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: #00ffcc;
+        }
+
+        /* Efek Teks saat dicentang (Coret) */
+        .task-item input[type="checkbox"]:checked+span {
+            text-decoration: line-through;
+            color: #64748b;
+        }
+
+        /* Batas Pemisah */
+        .divider {
+            border-top: 2px dashed #334155;
+            margin: 25px 0;
+        }
+
+        /* Kotak Input untuk Misi Tambahan Mendadak */
+        .input-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #334155;
+            background-color: #0f172a;
+            color: white;
+            outline: none;
+        }
+
+        input[type="text"]:focus {
+            border-color: #00ffcc;
+        }
+
+        .btn-tambah {
+            background: #00ffcc;
+            color: #0f172a;
+            border: none;
+            padding: 12px 20px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .btn-hapus {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: #0f172a;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #334155;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>⚓ Mission Control</h2>
+        <div class="sub">Target: FTTM ITB | "Consistency over Intensity"</div>
+
+        <div id="jadwalMingguan">
+
+            <div class="day-card">
+                <div class="day-title">📅 Senin</div>
+                <label class="task-item">
+                    <input type="checkbox" id="chk_senin_1" onchange="simpanProgress()">
+                    <span>📐 Matematika: Fondasi Aljabar & Fungsi</span>
+                </label>
+                <label class="task-item">
+                    <input type="checkbox" id="chk_senin_2" onchange="simpanProgress()">
+                    <span>💼 Financial: Update Portofolio Reksadana/Saham</span>
+                </label>
+            </div>
+
+            <div class="day-card">
+                <div class="day-title">📅 Selasa</div>
+                <label class="task-item">
+                    <input type="checkbox" id="chk_selasa_1" onchange="simpanProgress()">
+                    <span>🧲 Fisika: Mekanika & Hukum Newton</span>
+                </label>
+                <label class="task-item">
+                    <input type="checkbox" id="chk_selasa_2" onchange="simpanProgress()">
+                    <span>🎮 Reward: Gaming Time (Push Rank MLBB / Open-World)</span>
+                </label>
+            </div>
+
+            <div class="day-card">
+                <div class="day-title">📅 Rabu</div>
+                <label class="task-item">
+                    <input type="checkbox" id="chk_rabu_1" onchange="simpanProgress()">
+                    <span>🧪 Kimia: Stoikiometri & Struktur Atom</span>
+                </label>
+                <label class="task-item">
+                    <input type="checkbox" id="chk_rabu_2" onchange="simpanProgress()">
+                    <span>🏃‍♂️ Workout: Burpees / Angkat Barbel (Nyalakan Strava)</span>
+                </label>
+            </div>
+
+            <div class="day-card">
+                <div class="day-title">📅 Kamis</div>
+                <label class="task-item">
+                    <input type="checkbox" id="chk_kamis_1" onchange="simpanProgress()">
+                    <span>📝 Try Out Mandiri: Latihan Soal Campuran UTBK</span>
+                </label>
+                <label class="task-item">
+                    <input type="checkbox" id="chk_kamis_2" onchange="simpanProgress()">
+                    <span>🎨 Creative: Sesi Desain Canva / Editing CapCut</span>
+                </label>
+            </div>
+
+            <div class="day-card">
+                <div class="day-title">📅 Jumat</div>
+                <label class="task-item">
+                    <input type="checkbox" id="chk_jumat_1" onchange="simpanProgress()">
+                    <span>🇬🇧 English & Offshore Insight: Baca Artikel Jurnal Rig</span>
+                </label>
+                <label class="task-item">
+                    <input type="checkbox" id="chk_jumat_2" onchange="simpanProgress()">
+                    <span>🧱 Gaming Sandbox: Minecraft / Roblox / Geometry Dash</span>
+                </label>
+            </div>
+
+            <div class="day-card">
+                <div class="day-title">📅 Sabtu</div>
+                <label class="task-item">
+                    <input type="checkbox" id="chk_sabtu_1" onchange="simpanProgress()">
+                    <span>🔍 Evaluasi: Bedah Total Logika Soal yang Salah</span>
+                </label>
+                <label class="task-item">
+                    <input type="checkbox" id="chk_sabtu_2" onchange="simpanProgress()">
+                    <span>🍫 Chill: Istirahat & Berburu Cokelat/Dessert Favorit</span>
+                </label>
+            </div>
+
+            <div class="day-card">
+                <div class="day-title" style="color: #ef4444;">📅 Minggu</div>
+                <label class="task-item">
+                    <input type="checkbox" id="chk_minggu_1" onchange="simpanProgress()">
+                    <span>🌊 TOTAL RECHARGE: Libur Total & Segarkan Pikiran</span>
+                </label>
+            </div>
+
+        </div>
+
+        <div class="divider"></div>
+
+        <h3 style="color: #00ffcc; font-size: 16px; margin-bottom: 10px;">🚀 MISI TAMBAHAN HARI INI</h3>
+        <div class="input-box">
+            <input type="text" id="misiBaru" placeholder="Ada tugas sekolah atau misi dadakan?">
+            <button class="btn-tambah" onclick="tambahMisiSpontan()">Tambah</button>
+        </div>
+
+        <ul id="listMisiSpontan">
+        </ul>
+    </div>
+
+    <script>
+        // Daftar semua ID checkbox jadwal mingguan untuk sistem memori otomatis
+        const semuaIDCheckbox = [
+            "chk_senin_1", "chk_senin_2",
+            "chk_selasa_1", "chk_selasa_2",
+            "chk_rabu_1", "chk_rabu_2",
+            "chk_kamis_1", "chk_kamis_2",
+            "chk_jumat_1", "chk_jumat_2",
+            "chk_sabtu_1", "chk_sabtu_2",
+            "chk_minggu_1"
+        ];
+
+        // 1. Fungsi Menyimpan Status Centang Jadwal Mingguan
+        function simpanProgress() {
+            semuaIDCheckbox.forEach(id => {
+                const cb = document.getElementById(id);
+                localStorage.setItem(id, cb.checked);
+            });
+        }
+
+        // 2. Fungsi Membuka Kembali Status Centang yang Tersimpan saat Web Dibuka
+        function muatProgress() {
+            semuaIDCheckbox.forEach(id => {
+                const cb = document.getElementById(id);
+                const statusTersimpan = localStorage.getItem(id);
+                if (statusTersimpan === "true") {
+                    cb.checked = true;
+                }
+            });
+            muatMisiSpontan(); // Muat juga misi tambahan jika ada
+        }
+
+        // 3. Fungsi Tambah Misi Spontan/Dadakan (seperti fitur lamamu)
+        function tambahMisiSpontan() {
+            let input = document.getElementById("misiBaru");
+            let teks = input.value.trim();
+
+            if (teks !== "") {
+                let list = JSON.parse(localStorage.getItem("misiSpontanData")) || [];
+                list.push(teks);
+                localStorage.setItem("misiSpontanData", JSON.stringify(list));
+
+                input.value = "";
+                muatMisiSpontan();
+            }
+        }
+
+        // 4. Fungsi Menampilkan & Memperbarui Daftar Misi Spontan
+        function muatMisiSpontan() {
+            let ul = document.getElementById("listMisiSpontan");
+            ul.innerHTML = "";
+            let list = JSON.parse(localStorage.getItem("misiSpontanData")) || [];
+
+            list.forEach((teks, index) => {
+                let li = document.createElement("li");
+                li.innerHTML = `<span>🔹 ${teks}</span> <button class="btn-hapus" onclick="hapusMisiSpontan(${index})">Selesai</button>`;
+                ul.appendChild(li);
+            });
+        }
+
+        // 5. Fungsi Hapus Misi Spontan saat Diklik "Selesai"
+        function hapusMisiSpontan(index) {
+            let list = JSON.parse(localStorage.getItem("misiSpontanData")) || [];
+            list.splice(index, 1);
+            localStorage.setItem("misiSpontanData", JSON.stringify(list));
+            muatMisiSpontan();
+        }
+
+        // Tekan Enter di keyboard langsung menambah misi spontan
+        document.getElementById("misiBaru").addEventListener("keypress", function (e) {
+            if (e.key === "Enter") {
+                tambahMisiSpontan();
+            }
+        });
+
+        // Jalankan pencarian memori otomatis saat halaman web pertama kali dimuat
+        window.onload = muatProgress;
+    </script>
+</body>
+
+</html>
